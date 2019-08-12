@@ -1,4 +1,4 @@
-package test;
+package leetcode;
 /*
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 
@@ -12,6 +12,7 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
  */
 
+@SuppressWarnings("unused")
 public class Q001_TwoSum {
     // 暴力算法
     public int[] twoSum_1(int[] nums, int target) {
