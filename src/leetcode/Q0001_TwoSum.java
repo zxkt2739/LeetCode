@@ -6,12 +6,13 @@ You may assume that each input would have exactly one solution, and you may not 
 
 Example:
 
-Given nums = [2, 7, 11, 15], target = 9,
+    Given nums = [2, 7, 11, 15], target = 9,
 
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
+    Because nums[0] + nums[1] = 2 + 7 = 9,
+    return [0, 1].
 
-2019-08-13
+
+date: 2019-08-13
  */
 
 
@@ -19,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class Q001_TwoSum {
+public class Q0001_TwoSum {
     /*
     解法一：暴力算法
 
