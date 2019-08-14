@@ -16,6 +16,7 @@ Example:
 date:
  */
 
+
 import utils.ListNode;
 
 @SuppressWarnings("unused")
@@ -32,10 +33,10 @@ public class Q0002_AddTwoNumbers {
 
         * 将当前结点初始化为返回列表的哑结点。
         * 将进位 carry 初始化为 0。
-        * 将 pp 和 qq 分别初始化为列表 l1 和 l2 的头部。
+        * 将 p 和 q 分别初始化为列表 l1 和 l2 的头部。
         * 遍历列表 l1 和 l2 直至到达它们的尾端。
-            ^ 将 x 设为结点 p 的值。如果 pp 已经到达 l1 的末尾，则将其值设置为 00。
-            ^ 将 y 设为结点 q 的值。如果 qq 已经到达 l2 的末尾，则将其值设置为 00。
+            ^ 将 x 设为结点 p 的值。如果 p 已经到达 l1 的末尾，则将其值设置为 0。
+            ^ 将 y 设为结点 q 的值。如果 q 已经到达 l2 的末尾，则将其值设置为 0。
             ^ 设定 sum = x + y + carry。
             ^ 更新进位的值，carry = sum / 10。
             ^ 创建一个数值为 (sum mod 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点。
@@ -53,6 +54,19 @@ public class Q0002_AddTwoNumbers {
      */
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode(0);
+        int c = 0;
+        int a = l1.val + l2.val;
+        if (a > 9) {
+            a = a - 10;
+            c = 1;
+        }
+        if (l1.next != null) {
+            if (l2.next != null) {
+
+            }
+        }
+
 
 
         return null;
