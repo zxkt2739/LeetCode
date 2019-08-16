@@ -13,7 +13,7 @@ Example:
     Explanation: 342 + 465 = 807.
 
 
-date:
+date: 2019-08-16
  */
 
 
@@ -54,21 +54,30 @@ public class Q0002_AddTwoNumbers {
      */
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode result = new ListNode(0);
-        int c = 0;
-        int a = l1.val + l2.val;
-        if (a > 9) {
-            a = a - 10;
-            c = 1;
+        // 创建哑结点
+        ListNode dummyHead = new ListNode(0);
+        // 创建保存结果的循环变量，将哑结点赋为其初始值
+        ListNode curr = dummyHead;
+        // 创建l1和l2的循环变量
+        ListNode p = l1;
+        ListNode q = l2;
+        // carry保存进位
+        int carry = 0;
+        while (p != null || q != null) {
+            int x = p != null ? p.val : 0;
+            int y = q != null ? q.val : 0;
+            int sum = x + y + carry;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            // 移动循环变量到下一个结点
+            curr = curr.next;
+            p = p != null ? p.next : null;
+            q = q != null ? q.next : null;
         }
-        if (l1.next != null) {
-            if (l2.next != null) {
-
-            }
+        // 上面注意事项中第三种情况
+        if (carry > 0) {
+            curr.next = new ListNode(carry);
         }
-
-
-
-        return null;
+        return dummyHead.next;
     }
 }
