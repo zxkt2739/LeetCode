@@ -1,14 +1,13 @@
 package utils;
 
 /*
-单向链表
+单向链表（Q0002）
  */
-@SuppressWarnings("all")
 public class ListNode {
     public int val;
     public ListNode next;
 
     public ListNode(int x) {
-        val = x;
+        this.val = x;
     }
 }

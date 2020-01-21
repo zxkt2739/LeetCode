@@ -54,7 +54,7 @@ public class Q0002_AddTwoNumbers {
      */
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        // 创建哑结点
+        // 创建哑结点（用于保存结果链表的初始位置）
         ListNode dummyHead = new ListNode(0);
         // 创建保存结果的循环变量，将哑结点赋为其初始值
         ListNode curr = dummyHead;
