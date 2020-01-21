@@ -23,28 +23,27 @@ package leetcode;
             Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
 
-    date:
+    date: 2020-01-20
  */
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-//@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class Q0003_LongestSubstringWithoutRepeatingCharacters {
 
     /**
         算法一：自己解法
 
-
+        首先定义一个list集合和一个int类型变量max（用于存储最大长度），将字符串转成char[]数组。
+        遍历该数组，如果list中没有该字符，就将其放入list中，并更新max的值；如果list中含有该字符，就按照该字符将list分成两部分，
+        第一部分用于和max比较并更新max，第二部分用于继续遍历拼接char[]数组中剩余的字符串
 
      */
     public int lengthOfLongestSubstring_1(String s) {
         char[] chars = s.toCharArray();
         int max = 0;
-        List list = new ArrayList<Character>();
+        List<Character> list = new ArrayList<>();
         for (char c : chars) {
             if (!list.contains(c)) {
                 list.add(c);
@@ -56,7 +55,7 @@ public class Q0003_LongestSubstringWithoutRepeatingCharacters {
                 if (index > max) {
                     max = index;
                 }
-                list = new ArrayList<Character>(list.subList(index + 1, list.size()));
+                list = new ArrayList<>(list.subList(index + 1, list.size()));
                 list.add(c);
             }
         }
@@ -104,5 +103,64 @@ public class Q0003_LongestSubstringWithoutRepeatingCharacters {
             }
         }
         return max;
+    }
+
+
+    /**
+        解法三：优化的滑动窗口
+
+        上述的方法最多需要执行 2n 个步骤。事实上，它可以被进一步优化为仅需要 n 个步骤。我们可以定义字符到索引的映射，而不是使用集合
+        来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。
+
+        也就是说，如果 s[j] 在 [i, j) 范围内有与 j' 重复的字符，我们不需要逐渐增加 i 。 我们可以直接跳过 [i，j'] 范围内的所有元素，
+        并将 i 变为 j' + 1
+     */
+    public int lengthOfLongestSubstring_3(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>(); // current index of character
+        // try to extend the range [i, j]
+        for (int j = 0, i = 0; j < n; j++) {
+            if (map.containsKey(s.charAt(j))) {
+                i = Math.max(map.get(s.charAt(j)), i);
+            }
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);
+        }
+        return ans;
+    }
+
+
+    /**
+        解法四：使用字符集来替换Map
+
+        以前的我们都没有对字符串 s 所使用的字符集进行假设。
+
+        当我们知道该字符集比较小的时侯，我们可以用一个整数数组作为直接访问表来替换 Map。
+
+        常用的表如下所示：
+
+         int [26] 用于字母 ‘a’ - ‘z’ 或 ‘A’ - ‘Z’
+         int [128] 用于ASCII码
+         int [256] 用于扩展ASCII码
+
+
+         复杂度分析:
+
+         时间复杂度：O(n)，索引 jj 将会迭代 n 次。
+
+         空间复杂度（HashMap）：O(min(m, n))，与之前的方法相同。
+
+         空间复杂度（Table）：O(m)，m 是字符集的大小。
+     */
+    public int lengthOfLongestSubstring_4(String s) {
+        int n = s.length(), ans = 0;
+        int[] index = new int[128]; // current index of character
+        // try to extend the range [i, j]
+        for (int j = 0, i = 0; j < n; j++) {
+            i = Math.max(index[s.charAt(j)], i);
+            ans = Math.max(ans, j - i + 1);
+            index[s.charAt(j)] = j + 1;
+        }
+        return ans;
     }
 }
