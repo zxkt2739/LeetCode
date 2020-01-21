@@ -19,7 +19,7 @@ package leetcode;
 
 import utils.ListNode;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused, Duplicates")
 public class Q0002_AddTwoNumbers {
 
     /**
